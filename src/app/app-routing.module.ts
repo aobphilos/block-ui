@@ -9,12 +9,12 @@ import { RequestFromOtherComponent } from './request-from-other/request-from-oth
 import { SummaryDischargeComponent } from './summary-discharge/summary-discharge.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'medical-chain', pathMatch: 'full' },
   { path: 'medical-chain', component: MedicalChainComponent },
   { path: 'request-medical', component: RequestMedicalRecordComponent },
   { path: 'medical-record', component: MedicalRecordListComponent },
   { path: 'request-other', component: RequestFromOtherComponent },
   { path: 'summary-discharge', component: SummaryDischargeComponent },
+  { path: '', redirectTo: '/medical-chain', pathMatch: 'full' },
   { path: '**', component: FileNotFoundComponent }
 ];
 
