@@ -3,7 +3,6 @@
 @import "styles-variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~font-awesome/scss/font-awesome";
-@import "theme.green";
 header {
   nav {
     width: 100%;
@@ -13,4 +12,8 @@ header {
       width: 80%;
     }
   }
+}
+
+i.fa::before {
+  padding-right: 0.35rem;
 }
