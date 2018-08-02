@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FileNotFoundComponent } from './file-not-found/file-not-found.component';
-import { MedicalChainComponent } from './medical-chain/medical-chain.component';
-import { RequestMedicalRecordComponent } from './request-medical-record/request-medical-record.component';
-import { MedicalRecordListComponent } from './medical-record-list/medical-record-list.component';
-import { RequestFromOtherComponent } from './request-from-other/request-from-other.component';
-import { SummaryDischargeComponent } from './summary-discharge/summary-discharge.component';
+import { FileNotFoundComponent } from './pages/file-not-found/file-not-found.component';
+import { MedicalChainComponent } from './pages/medical-chain/medical-chain.component';
+import { MedicalRecordListComponent } from './pages/medical-record-list/medical-record-list.component';
+import { RequestFromOtherComponent } from './pages/request-from-other/request-from-other.component';
+import { RequestMedicalRecordComponent } from './pages/request-medical-record/request-medical-record.component';
+import { SummaryDischargeComponent } from './pages/summary-discharge/summary-discharge.component';
 
 const routes: Routes = [
   { path: 'medical-chain', component: MedicalChainComponent },
@@ -22,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class UiRoutingModule { }
