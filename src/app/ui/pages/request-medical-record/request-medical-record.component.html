@@ -75,25 +75,25 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="requestModalLabel">Requst Medical Record</h5>
-        
+
       </div>
       <div class="modal-body">
         <form>
           <div class="form-group">
             <label for="input-hospital" class="col-form-label">To Hostpital:</label>
-            <input type="text" class="form-control" id="input-hospital"> 
+            <input type="text" class="form-control" id="input-hospital">
           </div>
           <div class="form-group">
-              <label for="input-cid" class="col-form-label">CID:</label>
-              <input type="text" class="form-control" id="input-cid"> 
-            </div>
-            <div class="form-group">
-                <label for="input-from-date" class="col-form-label">From Date:</label>
-                <input type="text" class="form-control" id="input-from-date"> 
-              </div>
+            <label for="input-cid" class="col-form-label">CID:</label>
+            <input type="text" class="form-control" id="input-cid">
+          </div>
+          <div class="form-group">
+            <label for="input-from-date" class="col-form-label">From Date:</label>
+            <input type="date" class="form-control" min="2000-01-01" id="input-from-date" placeholder="yyyy-mm-dd">
+          </div>
           <div class="form-group">
             <label for="input-to-date" class="col-form-label">To Date:</label>
-            <textarea class="form-control" id="input-to-date"></textarea>
+            <input type="date" class="form-control" min="2000-01-01" id="input-to-date" placeholder="yyyy-mm-dd">
           </div>
         </form>
       </div>
