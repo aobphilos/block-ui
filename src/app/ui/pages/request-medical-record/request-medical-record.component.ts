@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-request-medical-record',
@@ -9,16 +9,25 @@ import { NgbModal, ModalDismissReasons, NgbDateStruct } from '@ng-bootstrap/ng-b
 export class RequestMedicalRecordComponent implements OnInit {
   closeResult: string;
   model: {
+    hospital: string,
+    cid: string,
     fromDate: NgbDateStruct,
     toDate: NgbDateStruct
   };
 
   constructor(
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private calendar: NgbCalendar
   ) {
+    this.resetModel();
+  }
+
+  private resetModel() {
     this.model = {
-      fromDate: { day: 1, month: 8, year: 2018 },
-      toDate: { day: 1, month: 8, year: 2018 }
+      hospital: '',
+      cid: '',
+      fromDate: this.calendar.getToday(),
+      toDate: this.calendar.getNext(this.calendar.getToday(), 'd', 10)
     };
   }
 
@@ -30,8 +39,10 @@ export class RequestMedicalRecordComponent implements OnInit {
       })
       .result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
+        this.resetModel();
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        this.resetModel();
       });
   }
 
