@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FileNotFoundComponent } from './pages/file-not-found/file-not-found.component';
@@ -19,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [NgbModule.forRoot(), RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class UiRoutingModule { }

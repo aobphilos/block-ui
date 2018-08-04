@@ -26,7 +26,7 @@
           </button>
         </span>
         <span class="input-group-btn mr-2">
-          <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#createNewRequestModal">
+          <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#createNewRequestModal" (click)="openNewRequest(createNewRequestModal)">
             <i class="fa fa-plus-circle">New</i>
           </button>
         </span>
@@ -69,38 +69,46 @@
     </table>
   </div>
 </form>
-<div class="modal fade" id="createNewRequestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel"
-  aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog" role="dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="requestModalLabel">Requst Medical Record</h5>
+<p> {{closeResult}} </p>
+<ng-template #createNewRequestModal let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="requestModalLabel">Requst Medical Record</h5>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="input-hospital" class="col-form-label">To Hostpital:</label>
+          <input type="text" class="form-control" id="input-hospital"> </div>
+        <div class="form-group">
+          <label for="input-cid" class="col-form-label">CID:</label>
+          <input type="text" class="form-control" id="input-cid"> </div>
 
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="input-hospital" class="col-form-label">To Hostpital:</label>
-            <input type="text" class="form-control" id="input-hospital">
+        <div class="form-group">
+          <label for="inputFromDate" class="col-form-label">From Date:</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="model.fromDate" name="inputFromDate" id="inputFromDate"
+              ngbDatepicker #d="ngbDatepicker">
+            <button class="btn btn-calendar" (click)="d.toggle()" type="button">
+              <i class="fa fa-calendar"></i>
+            </button>
           </div>
-          <div class="form-group">
-            <label for="input-cid" class="col-form-label">CID:</label>
-            <input type="text" class="form-control" id="input-cid">
+        </div>
+        <div class="form-group">
+          <label for="inputToDate" class="col-form-label">To Date:</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="model.toDate" name="inputToDate" id="inputToDate" ngbDatepicker
+              #d2="ngbDatepicker">
+            <button class="btn btn-calendar" (click)="d2.toggle()" type="button">
+              <i class="fa fa-calendar"></i>
+            </button>
           </div>
-          <div class="form-group">
-            <label for="input-from-date" class="col-form-label">From Date:</label>
-            <input type="date" class="form-control" min="2000-01-01" id="input-from-date" placeholder="yyyy-mm-dd">
-          </div>
-          <div class="form-group">
-            <label for="input-to-date" class="col-form-label">To Date:</label>
-            <input type="date" class="form-control" min="2000-01-01" id="input-to-date" placeholder="yyyy-mm-dd">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Request</button>
-      </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-primary" (click)="c('Request click')">Request</button>
     </div>
   </div>
-</div>
+</ng-template>

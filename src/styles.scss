@@ -17,3 +17,16 @@ header {
 i.fa::before {
   padding-right: 0.35rem;
 }
+
+.btn {
+  &.btn-calendar {
+    width: 3rem;
+    text-align: center;
+    background-color: transparent;
+    border: 0.05rem dashed #8c9692;
+    i.fa {
+      left: 0.15rem;
+      position: relative;
+    }
+  }
+}
