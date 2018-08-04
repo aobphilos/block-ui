@@ -1,3 +1,90 @@
-<p>
-  summary-discharge works!
-</p>
+<form>
+  <div class="row">
+    <div class="col">
+      <h3>Summary Discharge</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-3">
+      <div class="form-group">
+        <select class="form-control mr-2">
+          <option>Hospital 1</option>
+          <option>Hospital 2</option>
+          <option>Hospital 3</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-5">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search..."> </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <div class="form-group">
+        <span class="input-group-btn mr-2">
+          <button class="btn btn-primary" type="button">
+            <i class="fa fa-search">Search</i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">TransId</th>
+          <th scope="col">With Hospital</th>
+          <th scope="col">Discharge Type</th>
+          <th scope="col">Discharge Date</th>
+          <th scope="col">Controls</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>c56161f4-5cd8-4fef-9670-a5bd004449d1</td>
+          <td>Hospital B</td>
+          <td>From</td>
+          <td>2018-01-01</td>
+          <td>
+            <button type="button" data-toggle="modal" data-target="#recordDetailModal" class="btn btn-warning" (click)="openNewRequest(recordDetailModal)">Details</button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>037e7bf2-43af-4606-b270-6a45d3551c11</td>
+          <td>Hospital C</td>
+          <td>To</td>
+          <td>2018-04-01</td>
+          <td>
+            <button type="button" data-toggle="modal" data-target="#recordDetailModal" class="btn btn-warning" (click)="openNewRequest(recordDetailModal)">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
+<p> {{closeResult}} </p>
+<ng-template #recordDetailModal let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="recordDetailLabel">Medical Record Details</h5>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col">
+          <span class="font-weight-bold">CID: 1608051284699</span>
+        </div>
+      </div>
+      <div class="row my-2 pl-5">
+        <div class="col">
+          <span>From: Hospital B</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    </div>
+  </div>
+</ng-template>

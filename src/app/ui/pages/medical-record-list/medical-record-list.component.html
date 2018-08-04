@@ -1,3 +1,151 @@
-<p>
-  medical-record-list works!
-</p>
+<form>
+  <div class="row">
+    <div class="col">
+      <h3>Medical Record List</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-3">
+      <div class="form-group">
+        <select class="form-control mr-2">
+          <option>CID 1</option>
+          <option>CID 2</option>
+          <option>CID 3</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-5">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search..."> </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <div class="form-group">
+        <span class="input-group-btn mr-2">
+          <button class="btn btn-primary" type="button">
+            <i class="fa fa-search">Search</i>
+          </button>
+        </span>
+        <span class="input-group-btn mr-2">
+          <button class="btn btn-primary" type="button" data-toggle="modal" (click)="openRequest(addMedicalModal)">
+            <i class="fa fa-plus-circle">New</i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="d-flex flex-wrap mb-3 align-items-start">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      CID: 1602032420399
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Total Records: 5</h5>
+      <div class="card-text">
+        <p>Min Date: 5</p>
+        <p>Max Date: 5</p>
+      </div>
+      <button class="btn btn-primary" (click)="openRequest(editMedicalModal, 'edit')">View</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      CID: 1602032420399
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Total Records: 5</h5>
+      <div class="card-text">
+        <p>Min Date: 5</p>
+        <p>Max Date: 5</p>
+      </div>
+      <button class="btn btn-primary" (click)="openRequest(editMedicalModal, 'edit')">View</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      CID: 1602032420399
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Total Records: 5</h5>
+      <div class="card-text">
+        <p>Min Date: 5</p>
+        <p>Max Date: 5</p>
+      </div>
+      <button class="btn btn-primary" (click)="openRequest(editMedicalModal, 'edit')">View</button>
+    </div>
+  </div>
+</div>
+<ng-template #addMedicalModal let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="addMedicalLabel">Add Medical Record</h5>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="inputCid" class="col-form-label">CID:</label>
+          <input type="text" class="form-control" id="inputCid" name="inputCid" [(ngModel)]="model.cid"> </div>
+        <div class="form-group">
+          <label for="inputChronic" class="col-form-label">Chronic:</label>
+          <input type="text" class="form-control" id="inputChronic" name="inputChronic" [(ngModel)]="model.chronic"> </div>
+        <div class="form-group">
+          <label for="inputDrugAllergyDate" class="col-form-label">Drug Allergy:</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="model.drugAllergyDate" name="inputDrugAllergyDate" id="inputDrugAllergyDate"
+              ngbDatepicker #d="ngbDatepicker">
+            <button class="btn btn-calendar" (click)="d.toggle()" type="button">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="c('Request click')">Add</button>
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #editMedicalModal let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="editMedicalLabel">Medical Record Details</h5>
+    </div>
+    <div class="modal-body">
+
+      <div class="form-group">
+        <h4>CID: {{model.cid}}</h4>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Check Date</th>
+                <th scope="col">Chronic</th>
+                <th scope="col">Drug Allergy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>2018-01-01</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>2018-04-01</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="c('Request click')">Add</button>
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

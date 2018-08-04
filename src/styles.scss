@@ -3,7 +3,6 @@
 @import "styles-variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~font-awesome/scss/font-awesome";
-@import "theme.green";
 header {
   nav {
     width: 100%;
@@ -11,6 +10,23 @@ header {
   @media (min-width: map-get($grid-breakpoints, sm)) {
     nav {
       width: 80%;
+    }
+  }
+}
+
+i.fa::before {
+  padding-right: 0.35rem;
+}
+
+.btn {
+  &.btn-calendar {
+    width: 3rem;
+    text-align: center;
+    background-color: transparent;
+    border: 0.05rem dashed #8c9692;
+    i.fa {
+      left: 0.15rem;
+      position: relative;
     }
   }
 }

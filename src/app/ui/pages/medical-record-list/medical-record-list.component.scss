@@ -1,0 +1,22 @@
+@import '../../../../styles-variables.scss';
+
+@media (min-width: map-get($grid-breakpoints, xs)) {
+  .card {
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)) {
+  .card {
+    width: 47%;
+    margin: 0 1rem 1rem 0;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, xl)) {
+  .card {
+    width: 31.5%;
+    margin: 0 1rem 1rem 0;
+  }
+}
