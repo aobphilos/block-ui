@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { RequestMedicalService } from '../../../core/request-medical.service';
 
 @Component({
   selector: 'app-request-medical-record',
@@ -7,28 +8,41 @@ import { NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-b
   styleUrls: ['./request-medical-record.component.scss']
 })
 export class RequestMedicalRecordComponent implements OnInit {
-  closeResult: string;
+
   model: {
     hospital: string,
     cid: string,
     fromDate: NgbDateStruct,
     toDate: NgbDateStruct
   };
+  cidSelected: string;
 
   constructor(
     private modalService: NgbModal,
-    private calendar: NgbCalendar
+    private calendar: NgbCalendar,
+    private reqMedService: RequestMedicalService
   ) {
     this.resetModel();
   }
 
-  private resetModel() {
-    this.model = {
-      hospital: '',
-      cid: '',
-      fromDate: this.calendar.getToday(),
-      toDate: this.calendar.getNext(this.calendar.getToday(), 'd', 10)
-    };
+  get currentItems() {
+    return this.reqMedService.currentItems;
+  }
+
+  get allCid() {
+    return this.reqMedService.allCid;
+  }
+
+  get columns() {
+    return [
+      { prop: 'Id', name: '#', width: 45, sortable: false },
+      { prop: 'RequestId', name: 'Request Id', sortable: false },
+      { prop: 'ToHospital', name: 'To Hospital', sortable: false },
+      { prop: 'Cid', name: 'CID', sortable: false },
+      { prop: 'StartDate', name: 'From Date', pipe: '', sortable: false },
+      { prop: 'EndDate', name: 'To Date', pipe: '', sortable: false },
+      { prop: 'Status', name: 'Status', width: 85, sortable: false }
+    ];
   }
 
   openNewRequest(content) {
@@ -38,12 +52,24 @@ export class RequestMedicalRecordComponent implements OnInit {
         backdrop: 'static'
       })
       .result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
+        this.reqMedService.add(this.model).subscribe(res => console.log(res));
         this.resetModel();
       }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         this.resetModel();
       });
+  }
+
+  onSearch() {
+    this.reqMedService.getCurrentItems(this.cidSelected);
+  }
+
+  private resetModel() {
+    this.model = {
+      hospital: '',
+      cid: '',
+      fromDate: this.calendar.getToday(),
+      toDate: this.calendar.getNext(this.calendar.getToday(), 'd', 10)
+    };
   }
 
   private getDismissReason(reason: any): string {
@@ -56,7 +82,6 @@ export class RequestMedicalRecordComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

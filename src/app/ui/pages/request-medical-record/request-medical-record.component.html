@@ -7,11 +7,9 @@
   <div class="row">
     <div class="col-sm-12 col-md-3">
       <div class="form-group">
-        <select class="form-control mr-2">
-          <option>Option 1</option>
-          <option>Option 2</option>
-          <option>Option 3</option>
-        </select>
+        <ng-select id="cidSelected" name="cidSelected" [items]="allCid | async"
+          [(ngModel)]="cidSelected">
+        </ng-select>
       </div>
     </div>
     <div class="col-sm-12 col-md-5">
@@ -21,55 +19,26 @@
     <div class="col-sm-12 col-md-4">
       <div class="form-group">
         <span class="input-group-btn mr-2">
-          <button class="btn btn-primary" type="button">
+          <button class="btn btn-primary" type="button" (click)="onSearch()">
             <i class="fa fa-search">Search</i>
           </button>
         </span>
         <span class="input-group-btn mr-2">
-          <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#createNewRequestModal" (click)="openNewRequest(createNewRequestModal)">
+          <button class="btn btn-primary" type="button" data-toggle="modal"
+            data-target="#createNewRequestModal" (click)="openNewRequest(createNewRequestModal)">
             <i class="fa fa-plus-circle">New</i>
           </button>
         </span>
       </div>
     </div>
   </div>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">RequestId</th>
-          <th scope="col">To Hospital</th>
-          <th scope="col">CID</th>
-          <th scope="col">From Date</th>
-          <th scope="col">To Date</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>c56161f4-5cd8-4fef-9670-a5bd004449d1</td>
-          <td>Hospital B</td>
-          <td>1608051284699</td>
-          <td>2018-01-01</td>
-          <td>2018-01-01</td>
-          <td>Request</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>037e7bf2-43af-4606-b270-6a45d3551c11</td>
-          <td>Hospital C</td>
-          <td>1602032420399</td>
-          <td>2018-04-01</td>
-          <td>2018-05-31</td>
-          <td>Request</td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="currentItems | async as rows">
+    <ngx-datatable class="bootstrap" [rows]="rows" [columns]="columns"
+      [columnMode]="'force'" [footerHeight]="40" [sortType]="'multi'" [limit]="8"
+      [rowHeight]="'auto'" [reorderable]="false">
+    </ngx-datatable>
   </div>
 </form>
-<p> {{closeResult}} </p>
 <ng-template #createNewRequestModal let-c="close" let-d="dismiss">
   <div class="modal-content">
     <div class="modal-header">
@@ -79,16 +48,17 @@
       <form>
         <div class="form-group">
           <label for="inputHospital" class="col-form-label">To Hospital:</label>
-          <input type="text" class="form-control" id="inputHospital" name="inputHospital" [(ngModel)]="model.hospital"> </div>
+          <input type="text" class="form-control" id="inputHospital" name="inputHospital"
+            [(ngModel)]="model.hospital"> </div>
         <div class="form-group">
           <label for="inputCid" class="col-form-label">CID:</label>
-          <input type="text" class="form-control" id="inputCid" name="inputCid" [(ngModel)]="model.cid"> </div>
-
+          <input type="text" class="form-control" id="inputCid" name="inputCid"
+            [(ngModel)]="model.cid"> </div>
         <div class="form-group">
           <label for="inputFromDate" class="col-form-label">From Date:</label>
           <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="model.fromDate" name="inputFromDate" id="inputFromDate"
-              ngbDatepicker #d="ngbDatepicker">
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="model.fromDate"
+              name="inputFromDate" id="inputFromDate" ngbDatepicker #d="ngbDatepicker">
             <button class="btn btn-calendar" (click)="d.toggle()" type="button">
               <i class="fa fa-calendar"></i>
             </button>
@@ -97,8 +67,8 @@
         <div class="form-group">
           <label for="inputToDate" class="col-form-label">To Date:</label>
           <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="model.toDate" name="inputToDate" id="inputToDate" ngbDatepicker
-              #d2="ngbDatepicker">
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="model.toDate"
+              name="inputToDate" id="inputToDate" ngbDatepicker #d2="ngbDatepicker">
             <button class="btn btn-calendar" (click)="d2.toggle()" type="button">
               <i class="fa fa-calendar"></i>
             </button>
