@@ -1,7 +1,7 @@
 <form>
   <div class="row">
     <div class="col">
-      <h3>Requst Medical Record</h3>
+      <h3>Request Medical Record</h3>
     </div>
   </div>
   <div class="row">
@@ -14,7 +14,8 @@
     </div>
     <div class="col-sm-12 col-md-5">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search..."> </div>
+        <input id="keyword" name="keyword" type="text" class="form-control"
+          placeholder="Search..." [(ngModel)]="keyword" (keypress)="onKeypress($event)"> </div>
     </div>
     <div class="col-sm-12 col-md-4">
       <div class="form-group">

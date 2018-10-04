@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { RequestMedicalService } from '../../../core/request-medical.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class RequestMedicalRecordComponent implements OnInit {
     toDate: NgbDateStruct
   };
   cidSelected: string;
+  keyword: string;
 
   constructor(
     private modalService: NgbModal,
@@ -52,15 +53,25 @@ export class RequestMedicalRecordComponent implements OnInit {
         backdrop: 'static'
       })
       .result.then((result) => {
-        this.reqMedService.add(this.model).subscribe(res => console.log(res));
-        this.resetModel();
+        this.reqMedService.add(this.model)
+          .then(
+            (response) => this.resetModel(),
+            (error) => this.resetModel()
+          );
       }, (reason) => {
         this.resetModel();
       });
   }
 
   onSearch() {
-    this.reqMedService.getCurrentItems(this.cidSelected);
+    this.reqMedService.getCurrentItems(this.cidSelected, this.keyword);
+  }
+
+  onKeypress(event) {
+    if (event && event.charCode === 13) {
+      this.onSearch();
+    }
+
   }
 
   private resetModel() {
@@ -70,16 +81,6 @@ export class RequestMedicalRecordComponent implements OnInit {
       fromDate: this.calendar.getToday(),
       toDate: this.calendar.getNext(this.calendar.getToday(), 'd', 10)
     };
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 
   ngOnInit() { }
